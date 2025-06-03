@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Todo } from './models/Todo';
 import { Todos } from './components/Todos';
 import { CreateTodo } from './components/CreateTodo';
+import type { SortOptions } from './types/SortOption';
 
 export const App = () => {
 	const [todos, setTodos] = useState<Todo[]>(
@@ -37,7 +38,29 @@ export const App = () => {
 		)
 	);
 
-	console.log(todos);
+	const [sortedTodos, setSortedTodos] = useState<Todo[]>([...todos]);
+
+	const sortTodos = (sortBy: SortOptions) => {
+		const todosSorted = [...todos];
+		if (sortBy === 'default') {
+			setSortedTodos([...todos]);
+		}
+		if (sortBy === 'asc') {
+			todosSorted.sort((a, b) => {
+				if(a.task < b.task) {return -1; }
+				if(a.task > b.task) {return 1; }
+				return 0;
+			});
+		}
+		if (sortBy === 'desc') {
+			todosSorted.sort((a, b) => {
+				if(a.task > b.task) {return -1; }
+				if(a.task < b.task) {return 1; }
+				return 0;
+			});
+		}
+		setSortedTodos(todosSorted);
+	};
 
 	const toggleTodoAsDone = (id: number) => {
 		setTodos(
@@ -62,7 +85,7 @@ export const App = () => {
 
 	return (
 		<>
-			<Todos todos={todos} toggleAsDone={toggleTodoAsDone} deleteTodo={deleteTodo} />
+			<Todos todos={sortedTodos} toggleAsDone={toggleTodoAsDone} deleteTodo={deleteTodo} sortTodos={sortTodos} />
 			<CreateTodo createTodo={createNewTodo} />
 		</>
 	);
