@@ -1,19 +1,17 @@
-import { useState, type ChangeEvent } from "react";
+import { type ChangeEvent } from "react";
 import type { SortOptions } from "../types/SortOption";
 
 type SortProps = {
-    sortTodos: (sort: SortOptions) => void;
+	sortValue: SortOptions;
+	setSortValue: (sortValue: SortOptions) => void;
 }
 
-export const Sort = ({sortTodos}: SortProps) => {
+export const Sort = ({sortValue, setSortValue}: SortProps) => {
 
-	const [sortValue, setSortValue] = useState<SortOptions>('default');
+	// const [sortValue, setSortValue] = useState<SortOptions>('default');
 
 	const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
 		setSortValue(e.target.value as SortOptions);
-
-		// Här skrivs inte variabeln sortValue eftersom den inte uppdateras förrän efter funktionen är klar...
-		sortTodos(e.target.value as SortOptions);
 	}
 
 	return (

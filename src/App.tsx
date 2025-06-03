@@ -38,29 +38,44 @@ export const App = () => {
 		)
 	);
 
-	const [sortedTodos, setSortedTodos] = useState<Todo[]>([...todos]);
+	const [sortBy, setSortBy] = useState<SortOptions>('default');
 
-	const sortTodos = (sortBy: SortOptions) => {
-		const todosSorted = [...todos];
-		if (sortBy === 'default') {
-			setSortedTodos([...todos]);
-		}
-		if (sortBy === 'asc') {
-			todosSorted.sort((a, b) => {
-				if(a.task < b.task) {return -1; }
-				if(a.task > b.task) {return 1; }
-				return 0;
-			});
-		}
-		if (sortBy === 'desc') {
-			todosSorted.sort((a, b) => {
-				if(a.task > b.task) {return -1; }
-				if(a.task < b.task) {return 1; }
-				return 0;
-			});
-		}
-		setSortedTodos(todosSorted);
+	const handleSortValue = (sortValue: SortOptions) => {
+		setSortBy(sortValue);
 	};
+
+	/**
+	 * Makes a copy of the todos-list
+	 * if 'asc' or 'desc' is choosen in the dropdown the copied list 
+	 * will be sorted accordingly
+	 * Whenever the original list is updated / rerendering, 
+	 * this copy will also be updated and rerendered
+	 */
+	const sortedTodos = [...todos];
+
+	if (sortBy === 'asc') {
+		sortedTodos.sort((a, b) => {
+			if (a.task < b.task) {
+				return -1;
+			}
+			if (a.task > b.task) {
+				return 1;
+			}
+			return 0;
+		});
+	}
+
+	if (sortBy === 'desc') {
+		sortedTodos.sort((a, b) => {
+			if (a.task > b.task) {
+				return -1;
+			}
+			if (a.task < b.task) {
+				return 1;
+			}
+			return 0;
+		});
+	}
 
 	const toggleTodoAsDone = (id: number) => {
 		setTodos(
@@ -85,7 +100,13 @@ export const App = () => {
 
 	return (
 		<>
-			<Todos todos={sortedTodos} toggleAsDone={toggleTodoAsDone} deleteTodo={deleteTodo} sortTodos={sortTodos} />
+			<Todos
+				todos={sortedTodos}
+				toggleAsDone={toggleTodoAsDone}
+				deleteTodo={deleteTodo}
+				sortValue={sortBy}
+				setSortValue={handleSortValue}
+			/>
 			<CreateTodo createTodo={createNewTodo} />
 		</>
 	);
