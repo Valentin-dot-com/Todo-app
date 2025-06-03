@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Todo } from "./models/Todo";
+import { Todos } from "./components/Todos";
 
 export const App = () => {
 
@@ -31,9 +32,27 @@ export const App = () => {
     },
   ]);
 
+  console.log(todos);
+  
+
+  const toggleTodoAsDone = (id: number) => {
+    setTodos(
+      todos.map((t) => {
+        if (t.id === id) {
+          return {...t, done: !t.done};
+        }
+        return t;
+      })
+    )
+  }
+
+  const deleteTodo = (id: number) => {
+    setTodos(todos.filter((t) => t.id !== id));
+  }
+
 	return (
     <>
-      
+      <Todos todos={todos} toggleAsDone={toggleTodoAsDone} deleteTodo={deleteTodo} />
     </>
   );
 };
