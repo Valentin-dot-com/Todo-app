@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Todo } from './models/Todo';
 import { Todos } from './components/Todos';
+import { CreateTodo } from './components/CreateTodo';
 
 export const App = () => {
 	const [todos, setTodos] = useState<Todo[]>(
@@ -53,11 +54,16 @@ export const App = () => {
 		setTodos(todos.filter((t) => t.id !== id));
 	};
 
+	const createNewTodo = (todo: Todo) => {
+		setTodos([...todos, todo]);
+	};
+
 	localStorage.setItem('todos', JSON.stringify(todos));
 
 	return (
 		<>
 			<Todos todos={todos} toggleAsDone={toggleTodoAsDone} deleteTodo={deleteTodo} />
+			<CreateTodo createTodo={createNewTodo} />
 		</>
 	);
 };
