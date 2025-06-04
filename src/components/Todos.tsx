@@ -16,7 +16,7 @@ export const Todos = ({ todos, toggleAsDone, deleteTodo, sortValue, setSortValue
 	return (
 		<>
 			<section>
-				<h2>Todos</h2>
+				<h2>Your tasks:</h2>
 				<div>
 					<Sort sortValue={sortValue} setSortValue={setSortValue} />
 				</div>

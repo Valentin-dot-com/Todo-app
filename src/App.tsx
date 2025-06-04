@@ -5,6 +5,7 @@ import { CreateTodo } from './components/CreateTodo';
 import type { SortOptions } from './types/SortOption';
 
 export const App = () => {
+
 	const [todos, setTodos] = useState<Todo[]>(
 		JSON.parse(
 			localStorage.getItem('todos') ||
@@ -38,6 +39,11 @@ export const App = () => {
 		)
 	);
 
+	/**
+	 * State changes depending on what the user selects in dropdown
+	 * If value is changed, the rendered copy of todo-list will sort accordingly
+	 */
+
 	const [sortBy, setSortBy] = useState<SortOptions>('default');
 
 	const handleSortValue = (sortValue: SortOptions) => {
@@ -45,10 +51,14 @@ export const App = () => {
 	};
 
 	/**
+	 * 
+	 */
+
+	/**
 	 * Makes a copy of the todos-list
-	 * if 'asc' or 'desc' is choosen in the dropdown the copied list 
+	 * if 'asc' or 'desc' is choosen in the dropdown the copied list
 	 * will be sorted accordingly
-	 * Whenever the original list is updated / rerendering, 
+	 * Whenever the original list is updated / rerendering,
 	 * this copy will also be updated and rerendered
 	 */
 	const sortedTodos = [...todos];
@@ -77,6 +87,10 @@ export const App = () => {
 		});
 	}
 
+	/**
+	 * These are the function to handle the state of the todo-list
+	 * and its items
+	 */
 	const toggleTodoAsDone = (id: number) => {
 		setTodos(
 			todos.map((t) => {
@@ -96,10 +110,18 @@ export const App = () => {
 		setTodos([...todos, todo]);
 	};
 
+	/**
+	 * Always update localStorage to the newest version
+	 */
 	localStorage.setItem('todos', JSON.stringify(todos));
 
 	return (
 		<>
+			<main>
+				<header>
+					<h1>ToDoIt</h1>
+				</header>	
+			</main>
 			<Todos
 				todos={sortedTodos}
 				toggleAsDone={toggleTodoAsDone}

@@ -16,11 +16,14 @@ export const Sort = ({sortValue, setSortValue}: SortProps) => {
 
 	return (
 		<>
-			<select onChange={handleChange} value={sortValue}>
-				<option value='default'>No sorting</option>
-				<option value='asc'>Ascending</option>
-				<option value='desc'>Descending</option>
-			</select>
+			<div>
+				<p>Sort:</p>
+				<select onChange={handleChange} value={sortValue}>
+					<option value='default'>No sorting</option>
+					<option value='asc'>By name: ascending</option>
+					<option value='desc'>By name: descending</option>
+				</select>
+			</div>
 		</>
 	);
 };

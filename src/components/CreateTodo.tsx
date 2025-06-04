@@ -24,13 +24,13 @@ export const CreateTodo = ({ createTodo }: CreateTodoProps) => {
 	return (
 		<>
 			<section>
-				<h2>Add new to-do:</h2>
+				<h2>Add task:</h2>
 				<form onSubmit={createNewTodo}>
 					<label>
-                        <span>Task:</span>
+                        <span>What do you need to do?</span>
                         <input type='text' id='task' value={newTodo.task} onChange={handleChange} required></input>
                     </label>
-                    <button>Add new to-do</button>
+                    <button>Add new task</button>
 				</form>
 			</section>
 		</>
