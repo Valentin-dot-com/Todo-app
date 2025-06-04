@@ -19,13 +19,13 @@ export const Todos = ({ todos, toggleAsDone, deleteTodo, sortValue, setSortValue
 
 	return (
 		<>
-			<section>
-				<h2>Your tasks:</h2>
-				<div>
+			<section className="min-w-full bg-white rounded-xl shadow-md p-6 space-y-4 md:min-w-3/4 lg:min-w-1/2 2xl:min-w-1/3">
+				<h2 className='text-2xl font-BNattica tracking-wider'>Your tasks:</h2>
+				<div className='flex flex-row justify-between border-b-2 border-emerald-700 pt-2 pb-4 mb-4'>
 					<Sort sortValue={sortValue} setSortValue={setSortValue} />
 					<Filter filterValue={filterValue} setFilterValue={setFilterValue} />
 				</div>
-				<ul>
+				<ul className='flex flex-col min-w-full gap-4'>
 					{todos.map((t) => (
 						<TodoItem todoItem={t} toggleAsDone={toggleAsDone} deleteTodo={deleteTodo} key={t.id}/>
 					))}

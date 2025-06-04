@@ -1,1 +1,16 @@
 @import "tailwindcss";
+
+@font-face {
+    font-family: 'BNAttica';
+    src: url('/src/assets/fonts/BNAttica.otf');
+}
+
+@font-face {
+    font-family: 'BNBergenSt';
+    src: url('/src/assets/fonts/BNBergenSt.otf');
+}
+
+@theme {
+    --font-BNattica: "BNAttica";
+    --font-BNBergen: "BNBergenSt";
+}

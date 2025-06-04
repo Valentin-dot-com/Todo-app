@@ -14,8 +14,8 @@ export const Filter = ({setFilterValue, filterValue}: FilterProps) => {
 	return (
 		<>
         <div>
-            <p>Show:</p>
-			<select onChange={handleChange} value={filterValue}>
+            <p className="mb-2 text-emerald-800 text-xl font-BNBergen tracking-wider text-right">Show:</p>
+			<select onChange={handleChange} value={filterValue} className="p-2 rounded-lg bg-gray-100">
 				<option value='all'>All tasks</option>
 				<option value='notDone'>Not done tasks</option>
 				<option value='done'>Done tasks</option>

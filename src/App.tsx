@@ -134,21 +134,21 @@ export const App = () => {
 
 	return (
 		<>
-			<main>
-				<header>
-					<h1>ToDoIt</h1>
+			<main className="min-h-dvh bg-gray-100 flex flex-col items-center p-4">
+				<header className='m-6'>
+					<h1 className="text-3xl font-bold text-emerald-800 font-BNattica tracking-wide">ToDoIt</h1>
 				</header>	
+				<Todos
+					todos={sortedTodos}
+					toggleAsDone={toggleTodoAsDone}
+					deleteTodo={deleteTodo}
+					sortValue={sortBy}
+					setSortValue={handleSortValue}
+					filterValue={filter}
+					setFilterValue={handleFilterValue}
+				/>
+				<CreateTodo createTodo={createNewTodo} />
 			</main>
-			<Todos
-				todos={sortedTodos}
-				toggleAsDone={toggleTodoAsDone}
-				deleteTodo={deleteTodo}
-				sortValue={sortBy}
-				setSortValue={handleSortValue}
-				filterValue={filter}
-				setFilterValue={handleFilterValue}
-			/>
-			<CreateTodo createTodo={createNewTodo} />
 		</>
 	);
 };
