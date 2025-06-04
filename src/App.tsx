@@ -41,7 +41,7 @@ export const App = () => {
 	);
 
 	/**
-	 * State changes depending on what the user selects in dropdown
+	 * Sort-state changes depending on what the user selects in dropdown
 	 * If value is changed, the rendered copy of todo-list will sort accordingly
 	 */
 
@@ -52,7 +52,9 @@ export const App = () => {
 	};
 
 	/**
-	 * 
+	 * Filter-state changes depending on what the user selects in dropdown
+	 * If value changes, the rendered copy of list will be filtered
+	 * to show only tasks marked as done or not done, or show all tasks
 	 */
 
 	const [filter, setFilter] = useState<FilterOption>('all');
