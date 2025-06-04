@@ -3,6 +3,7 @@ import { Todo } from './models/Todo';
 import { Todos } from './components/Todos';
 import { CreateTodo } from './components/CreateTodo';
 import type { SortOptions } from './types/SortOption';
+import type { FilterOption } from './types/FilterOption';
 
 export const App = () => {
 
@@ -54,6 +55,12 @@ export const App = () => {
 	 * 
 	 */
 
+	const [filter, setFilter] = useState<FilterOption>('all');
+
+	const handleFilterValue = (filterValue: FilterOption) => {
+		setFilter(filterValue);
+	}
+
 	/**
 	 * Makes a copy of the todos-list
 	 * if 'asc' or 'desc' is choosen in the dropdown the copied list
@@ -61,7 +68,7 @@ export const App = () => {
 	 * Whenever the original list is updated / rerendering,
 	 * this copy will also be updated and rerendered
 	 */
-	const sortedTodos = [...todos];
+	let sortedTodos = [...todos];
 
 	if (sortBy === 'asc') {
 		sortedTodos.sort((a, b) => {
@@ -85,6 +92,14 @@ export const App = () => {
 			}
 			return 0;
 		});
+	}
+
+	if (filter === 'done') {
+		sortedTodos = sortedTodos.filter((t) => t.done === true);
+	}
+
+		if (filter === 'notDone') {
+		sortedTodos = sortedTodos.filter((t) => t.done === false);
 	}
 
 	/**
@@ -128,6 +143,8 @@ export const App = () => {
 				deleteTodo={deleteTodo}
 				sortValue={sortBy}
 				setSortValue={handleSortValue}
+				filterValue={filter}
+				setFilterValue={handleFilterValue}
 			/>
 			<CreateTodo createTodo={createNewTodo} />
 		</>
